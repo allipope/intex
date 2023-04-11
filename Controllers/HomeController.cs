@@ -1,4 +1,5 @@
-﻿using intex.Models;
+﻿using intex.Data;
+using intex.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,105 +7,108 @@ namespace intex.Controllers
 {
     public class HomeController : Controller
     {
-
-        private IMummyRepository repo;
-        private ITextileRepository repot;
-        private IColorRepository repoc;
-
-        public HomeController (IMummyRepository m, ITextileRepository t, IColorRepository c, ILogger<HomeController> logger, MummyContext temp)
-        {
-            repo = m;
-            repot = t;
-            repoc = c;
-            _logger = logger;
-            context = temp;
-        }
-
-        private readonly ILogger<HomeController> _logger;
-        
-        private MummyContext context { get; set; }
-
         public IActionResult Index()
         {
-            ViewBag.ShowTopBar = false;
             return View();
         }
+        //private IMummyRepository repo;
+        //private ITextileRepository repot;
+        //private IColorRepository repoc;
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public HomeController (IMummyRepository m, ITextileRepository t, IColorRepository c, ILogger<HomeController> logger, ApplicationDbContext temp)
+        //{
+        //    repo = m;
+        //    repot = t;
+        //    repoc = c;
+        //    _logger = logger;
+        //    context = temp;
+        //}
 
-        [HttpGet]
-        public IActionResult AddRecord()
-        {
-            return View("AddRecord", new mummy());
-        }
+        //private readonly ILogger<HomeController> _logger;
+        
+        //private ApplicationDbContext context { get; set; }
 
-        [HttpPost]
-        public IActionResult AddRecord(mummy mum)
-        {
-            // if (ModelState.IsValid)
-            // {
-            context.Add(mum);
-            context.SaveChanges();
-            return View("RecordConfirmation", mum);
-            // }
+        //public IActionResult Index()
+        //{
+        //    ViewBag.ShowTopBar = false;
+        //    return View();
+        //}
 
-            // else
-            // {
-                // ViewBag.burialmain = MummyContext.burialmain.ToList();
-                // return View();
-            // }
-        }
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
 
-        [HttpGet]
-        public IActionResult EditRecord(int id)
-        {
-            ViewBag.burialmain = context.burialmain.ToList();
-            var submission = context.burialmain.Single(x => x.id == id);
-            return View("AddRecord", submission);
-        }
+        //[HttpGet]
+        //public IActionResult AddRecord()
+        //{
+        //    return View("AddRecord", new mummy());
+        //}
 
-        [HttpPost]
-        public IActionResult EditRecord(mummy mum)
-        {
-            context.Update(mum);
-            context.SaveChanges();
-            return RedirectToAction("BurialRecords");
-        }
+        //[HttpPost]
+        //public IActionResult AddRecord(mummy mum)
+        //{
+        //    // if (ModelState.IsValid)
+        //    // {
+        //    context.Add(mum);
+        //    context.SaveChanges();
+        //    return View("RecordConfirmation", mum);
+        //    // }
 
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var submission = context.burialmain.Single(x => x.id == id);
-            return View(submission);
-        }
+        //    // else
+        //    // {
+        //        // ViewBag.burialmain = MummyContext.burialmain.ToList();
+        //        // return View();
+        //    // }
+        //}
 
-        [HttpPost]
-        public IActionResult Delete(mummy mum)
-        {
-            context.burialmain.Remove(mum);
-            context.SaveChanges();
-            return RedirectToAction("BurialRecords");
-        }
+        //[HttpGet]
+        //public IActionResult EditRecord(int id)
+        //{
+        //    ViewBag.burialmain = context.burialmain.ToList();
+        //    var submission = context.burialmain.Single(x => x.id == id);
+        //    return View("AddRecord", submission);
+        //}
+
+        //[HttpPost]
+        //public IActionResult EditRecord(mummy mum)
+        //{
+        //    context.Update(mum);
+        //    context.SaveChanges();
+        //    return RedirectToAction("BurialRecords");
+        //}
+
+        //[HttpGet]
+        //public IActionResult Delete(int id)
+        //{
+        //    var submission = context.burialmain.Single(x => x.id == id);
+        //    return View(submission);
+        //}
+
+        //[HttpPost]
+        //public IActionResult Delete(mummy mum)
+        //{
+        //    context.burialmain.Remove(mum);
+        //    context.SaveChanges();
+        //    return RedirectToAction("BurialRecords");
+        //}
 
 
-        public IActionResult BurialRecords()
-        {
-            ViewBag.burialmain = repo.mummies
-                .Join(repoc.)
-                .OrderBy(m => m.area)
-                .Take(5);
-            //ViewBag.textile = repot.textiles.ToList();
-            //ViewBag.color = repoc.colors.ToList();
-            return View();
-        }
+        //public IActionResult BurialRecords()
+        //{
+        //    ViewBag.burialmain = repo.mummies
+        //        //.Join(repoc)
+        //        .OrderBy(m => m.area)
+        //        .Take(5);
+        //    //ViewBag.textile = repot.textiles.ToList();
+        //    //ViewBag.color = repoc.colors.ToList();
+        //    return View();
+        //}
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

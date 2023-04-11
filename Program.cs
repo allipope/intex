@@ -5,17 +5,27 @@ using intex.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<MummyContext>(options =>
-    options.UseNpgsql(connectionString));
+//// Add services to the container.
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseNpgsql(connectionString));
+//builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
+//Link ASP User Classes:
+var connectionStringAuth = builder.Configuration.GetConnectionString("AuthLink");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(connectionStringAuth));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-  //  .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddScoped<IMummyRepository, EFMummyRepository>();
-builder.Services.AddScoped<IColorRepository, EFColorRepository>();
-builder.Services.AddScoped<ITextileRepository, EFTextileRepository>();
+
+
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+//builder.Services.AddScoped<IMummyRepository, EFMummyRepository>();
+//builder.Services.AddScoped<IColorRepository, EFColorRepository>();
+//builder.Services.AddScoped<ITextileRepository, EFTextileRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddHsts(options =>

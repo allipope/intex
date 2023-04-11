@@ -1,8 +1,12 @@
-﻿namespace intex.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace intex.Models
 {
-    public class color
+    public partial class Color
     {
-        public long id {  get; set; }
-        public string? value { get; set; }
+        public long Id { get; set; }
+        public string Value { get; set; }
+        public int? Colorid { get; set; }
     }
 }
