@@ -1,7 +1,7 @@
 @{
     ViewData["Title"] = "Records Page";
 }
-@model List<mummy>
+@*@model IQueryable<mummy>*@
 
 
     <!--services section start -->
@@ -15,11 +15,13 @@
                 <div class="col-md-6">
                     <div class="box_main">
                         <h1 class="technology_text">New Technology</h1>
-                        @foreach (var x in Model)
+                        @foreach (var bm in ViewBag.burialmain)
                         {
-                            <p class="dummy_text">@x.id</p>
+                            <h3>@bm.id</h3>
+
+                            <p class="dummy_text">@bm.area</p>
                         }
-                    </div>
+                </div>
                     <div class="readmore_bt"><a href="#">Read More</a></div>
                 </div>
             </div>

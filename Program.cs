@@ -12,9 +12,17 @@ builder.Services.AddDbContext<MummyContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
+  //  .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddScoped<IMummyRepository, EFMummyRepository>();
+builder.Services.AddScoped<IColorRepository, EFColorRepository>();
+builder.Services.AddScoped<ITextileRepository, EFTextileRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddHsts(options =>
+{
+    options.MaxAge = TimeSpan.FromDays(365);
+    options.IncludeSubDomains = true;
+});
 
 var app = builder.Build();
 
@@ -30,6 +38,7 @@ else
     app.UseHsts();
 }
 
+app.UseHsts();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

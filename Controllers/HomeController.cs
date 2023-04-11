@@ -6,10 +6,23 @@ namespace intex.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
-        private MummyContext context { get; set; }
 
-        public HomeController(MummyContext temp) => context = temp;
+        private IMummyRepository repo;
+        private ITextileRepository repot;
+        private IColorRepository repoc;
+
+        public HomeController (IMummyRepository m, ITextileRepository t, IColorRepository c, ILogger<HomeController> logger, MummyContext temp)
+        {
+            repo = m;
+            repot = t;
+            repoc = c;
+            _logger = logger;
+            context = temp;
+        }
+
+        private readonly ILogger<HomeController> _logger;
+        
+        private MummyContext context { get; set; }
 
         public IActionResult Index()
         {
@@ -22,10 +35,70 @@ namespace intex.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AddRecord()
+        {
+            return View("AddRecord", new mummy());
+        }
+
+        [HttpPost]
+        public IActionResult AddRecord(mummy mum)
+        {
+            // if (ModelState.IsValid)
+            // {
+            context.Add(mum);
+            context.SaveChanges();
+            return View("RecordConfirmation", mum);
+            // }
+
+            // else
+            // {
+                // ViewBag.burialmain = MummyContext.burialmain.ToList();
+                // return View();
+            // }
+        }
+
+        [HttpGet]
+        public IActionResult EditRecord(int id)
+        {
+            ViewBag.burialmain = context.burialmain.ToList();
+            var submission = context.burialmain.Single(x => x.id == id);
+            return View("AddRecord", submission);
+        }
+
+        [HttpPost]
+        public IActionResult EditRecord(mummy mum)
+        {
+            context.Update(mum);
+            context.SaveChanges();
+            return RedirectToAction("BurialRecords");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var submission = context.burialmain.Single(x => x.id == id);
+            return View(submission);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(mummy mum)
+        {
+            context.burialmain.Remove(mum);
+            context.SaveChanges();
+            return RedirectToAction("BurialRecords");
+        }
+
+
         public IActionResult BurialRecords()
         {
-            var blah = context.burialmain.ToList();
-            return View(blah);
+            ViewBag.burialmain = repo.mummies
+                .Join(repoc.)
+                .OrderBy(m => m.area)
+                .Take(5);
+            //ViewBag.textile = repot.textiles.ToList();
+            //ViewBag.color = repoc.colors.ToList();
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

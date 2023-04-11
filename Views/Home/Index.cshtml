@@ -22,13 +22,14 @@
                     <a class="nav-link" href="software.html">Our Software</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="services.html">Services</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="AddRecord">Add Record</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contact.html">Contact Us</a>
                 </li>
             </ul>
         </div>
+        <partial name="_LoginPartial"/>
     </nav>
     <div class="banner_main">
         <h1 class="banner_taital">Build Best</h1>
@@ -49,7 +50,7 @@
                 <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="BurialRecords">Records</a></li>
-                <li><a href="services.html">Services</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="AddRecord">Add Record</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </div>
