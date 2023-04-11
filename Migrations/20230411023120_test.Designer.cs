@@ -11,8 +11,8 @@ using intex.Models;
 namespace intex.Migrations
 {
     [DbContext(typeof(MummyContext))]
-    [Migration("20230411015520_Initial")]
-    partial class Initial
+    [Migration("20230411023120_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,14 +25,11 @@ namespace intex.Migrations
 
             modelBuilder.Entity("intex.Models.mummy", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<decimal>("depth")
-                        .HasColumnType("numeric");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
                     b.HasKey("id");
 

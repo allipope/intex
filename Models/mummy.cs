@@ -1,8 +1,10 @@
-﻿namespace intex.Models
+﻿using System.Numerics;
+
+namespace intex.Models
 {
     public class mummy
     {
-        public int id { get; set; }
-        public  decimal depth { get; set; }
+        public long id { get; set; }
+        //public  string depth { get; set; }
     }
 }
