@@ -1,7 +1,7 @@
 @{
     ViewData["Title"] = "Records Page";
 }
-@*@model IQueryable<mummy>*@
+@model BurialViewModel
 
 
     <!--services section start -->
@@ -15,12 +15,15 @@
                 <div class="col-md-6">
                     <div class="box_main">
                         <h1 class="technology_text">New Technology</h1>
-                        @foreach (var bm in ViewBag.burialmain)
+                        @foreach (Burialmain b in Model.Burialmains)
                         {
-                            <h3>@bm.id</h3>
+                            <h3>@b.Id</h3>
 
-                            <p class="dummy_text">@bm.area</p>
+                            <p class="dummy_text">@b.Area</p>
+                            <p class="dummy_text">@b.Sex</p>
+
                         }
+                <div page-blah ="@Model.PageInfo" page-action="BurialRecords"></div>
                 </div>
                     <div class="readmore_bt"><a href="#">Read More</a></div>
                 </div>

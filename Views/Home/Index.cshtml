@@ -2,10 +2,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!--header section start -->
+@*<!--header section start -->
 <div class="header_section">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -56,14 +55,17 @@
         </div>
         <div class="menu_main_1">
             <ul>
-                <li><a href="#">login</a></li>
-                <li><a href="#">Register</a></li>
-                <li><a href="#"><img src="images/search-icon.png"></a></li>
+                <partial name="_LoginPartial" />
             </ul>
         </div>
     </div>
 </div>
-<!--costume header section end -->
+<!--costume header section end -->*@
+
+<div>
+    <partial name="_LoginPartial" />
+</div>
+
 <!-- about section start -->
 <div class="about_section layout_padding">
     <div class="container">
